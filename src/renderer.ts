@@ -1,12 +1,29 @@
+import { ExperimentalCanvas } from "./exp/canvas";
+
 const X_STEP = 100;
 const Y_STEP = 100;
 
 export class Renderer {
-  constructor(private readonly ctx: CanvasRenderingContext2D) {}
+  experimentalCanvas: ExperimentalCanvas;
+
+  constructor(private readonly ctx: CanvasRenderingContext2D) {
+    this.experimentalCanvas = new ExperimentalCanvas(ctx);
+  }
 
   public run() {
     this.ctx.canvas.width = window.innerWidth;
     this.ctx.canvas.height = window.innerHeight;
+
+    // This code produces the same results as the following code
+    // this.experimentalCanvas.fillRect(
+    //   0,
+    //   0,
+    //   this.ctx.canvas.width,
+    //   this.ctx.canvas.height,
+    //   [0, 0, 0, 255],
+    // );
+
+    // this.experimentalCanvas.drawGrid(X_STEP, Y_STEP, [255, 255, 255, 255]);
 
     this.ctx.fillStyle = "black";
 
